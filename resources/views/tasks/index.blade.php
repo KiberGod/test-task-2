@@ -45,6 +45,12 @@
                                     </small>
                                 </p>
                                 <p class="text-muted">{{$task->created_at}}</p>
+                                @if(count($task->tags))
+                                    <span>Tags:</span>
+                                    @foreach($task->tags as $tag)
+                                        <span class="text-info">{{$tag->name}}</span>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                         <div class="coll-md-2">

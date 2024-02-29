@@ -18,6 +18,12 @@
                         </small>
                     </p>
                     <p class="text-muted">{{$task->created_at}}</p>
+                    @if(count($task->tags))
+                        <span>Tags:</span>
+                        @foreach($task->tags as $tag)
+                            <span class="text-info">{{$tag->name}}</span>
+                        @endforeach
+                    @endif
                     @if(count($task->files))
                         <p class="text-muted">Файлові додатки: </p>
                         @foreach($task->files as $file)
