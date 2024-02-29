@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(30)->create();
+        $this->call(RolesTableSeeder::class);
         Task::factory(300)->create();
         Tag::factory(200)->create();
     }
