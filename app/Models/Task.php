@@ -25,4 +25,15 @@ class Task extends Model
     {
         return $this->hasMany(File::class);
     }
+
+    public static function mergeRequestData($request)
+    {
+        $validatedData = $request->validated();
+
+        if ($request->has('execution_status')) {
+            return array_merge($validatedData, ['execution_status' => $request->execution_status]);
+        }
+
+        return $validatedData;
+    }
 }

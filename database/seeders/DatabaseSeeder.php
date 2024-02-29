@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(30)->create();
         $this->call(RolesTableSeeder::class);
-        Task::factory(300)->create();
-        Tag::factory(200)->create();
+        Task::factory(1000)->create();
+        Tag::factory(500)->create();
     }
 }

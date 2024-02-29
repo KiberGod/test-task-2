@@ -18,7 +18,7 @@ class TagFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'task_id' => rand(1, 300),
+            'task_id' => rand(1, 1000),
         ];
     }
 }
