@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Models\File;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,8 @@ class TasksController extends Controller
 
     public function store(TaskRequest $request)
     {
-        auth()->user()->tasks()->create($request->validated());
+        $task = auth()->user()->tasks()->create($request->validated());
+        File::uploadFiles($request, $task);
         return redirect('/tasks');
     }
 

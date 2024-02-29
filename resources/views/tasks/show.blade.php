@@ -18,6 +18,12 @@
                         </small>
                     </p>
                     <p class="text-muted">{{$task->created_at}}</p>
+                    @if(count($task->files))
+                        <p class="text-muted">Файлові додатки: </p>
+                        @foreach($task->files as $file)
+                            <p class="text-muted">{{$file->name}}</p>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

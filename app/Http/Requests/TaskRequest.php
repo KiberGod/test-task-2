@@ -23,7 +23,9 @@ class TaskRequest extends FormRequest
     {
         return [
             'title' => 'required|max:150',
-            'description' => 'required|max:500'
+            'description' => 'required|max:500',
+            'files.*' => 'nullable|file|max:2048',
+            'files' => 'max:10'
         ];
     }
 
@@ -33,6 +35,9 @@ class TaskRequest extends FormRequest
             'title.max' => 'Назва задачі занадто довга',
             'description.required' => 'Задача має містити опис',
             'description.max' => 'Опис задачі занадто довгий',
+            'files.*.file' => 'Помилка формату',
+            'files.*.max' => 'Максимальний обсяг файлів 2МБ.',
+            'files.max' => 'Максимальна кількість файлів - 10',
         ];
     }
 }
