@@ -2,13 +2,38 @@
 
 @section('content')
 
+    <script>
+        window.onload = function () {
+            setSortTypeText('{{$filters['sortingType']}}');
+            setSortGrowthText('{{$filters['sortingGrowth']}}');
+        }
+    </script>
+    <script type="text/javascript" src="/src/js/filtersCore.js"></script>
+
     <div class="row">
+        <div class="card-body">
+            <div class="filter-block">
+                <div>Сортування (Тип):</div>
+                <div class="line"></div>
+                <div><a class="filter-category" href="" id="type1" onclick="setSortingFilter(this, 'type', 'title')">За назвою</a></div>
+                <div><a class="filter-category" href="" id="type2" onclick="setSortingFilter(this, 'type', 'execution_status')">За статусом</a></div>
+                <div><a class="filter-category" href="" id="type3" onclick="setSortingFilter(this, 'type', 'created_at')">За датою створення</a></div>
+            </div>
+
+            <div class="filter-block">
+                <div>Сортування (Порядок):</div>
+                <div class="line"></div>
+                <div><a class="filter-category" href="" id="growth1" onclick="setSortingFilter(this, 'growth', 'desc')">Від більшого до меншого</a></div>
+                <div><a class="filter-category" href="" id="growth2" onclick="setSortingFilter(this, 'growth', 'asc')">Від меншого до більшого</a></div>
+            </div>
+        </div>
+
         <div class="col-md-8">
             @if ($tasks->lastPage() > 1)
                 <br>
                 <nav>
                     <ul class="pagination">
-                        @foreach ($tasks->getUrlRange(1, $tasks->lastPage()) as $page => $url)
+                        @foreach ($tasks->withQueryString()->getUrlRange(1, $tasks->lastPage()) as $page => $url)
                             <li class="page-item {{ ($tasks->currentPage() == $page) ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>

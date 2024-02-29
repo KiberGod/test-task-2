@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Task extends Model
 {
@@ -35,5 +36,19 @@ class Task extends Model
         }
 
         return $validatedData;
+    }
+
+    public static function getTasks($request)
+    {
+        $type = $request->type ?? 'created_at';
+        $growth = $request->growth ?? 'desc';
+        return Auth::user()->tasks()->orderBy($type, $growth)->paginate(10);
+    }
+
+    public static function getFilterParams($request) {
+        return [
+            'sortingType' => $request->filled('type') ? $request->type : 'created_at',
+            'sortingGrowth' => $request->filled('growth') ? $request->growth : 'desc',
+        ];
     }
 }

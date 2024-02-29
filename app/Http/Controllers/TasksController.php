@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\File;
 use App\Models\Task;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::user();
-        $tasks = $user->tasks()->paginate(10);
-        return view('tasks.index', compact('tasks'));
+        $tasks = Task::getTasks($request);
+        $filters = Task::getFilterParams($request);
+        return view('tasks.index', compact('tasks', 'filters'));
     }
 
     public function create()
